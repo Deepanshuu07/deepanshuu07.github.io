@@ -416,40 +416,46 @@
     .contact-box {
       display: flex !important;
       align-items: center;
+      justify-content: space-between;
       gap: 40px; 
       text-align: left !important; 
       padding: 40px;
     }
 
     .contact-avatar {
-      flex-shrink: 0; 
+      flex-shrink: 1; 
+    }
+
+    /* Forces contact links to sit vertically stacked right below the paragraph */
+    .contact-links {
+    display: flex !important;
+    flex-direction: column !important; /* Stacks links vertically */
+    align-items: flex-start !important; /* Aligns them to the left edge */
+    gap: 12px !important;
+    margin-top: 24px; /* Creates clean spacing under the paragraph */
+    }
+
+    .contact-content {
+      flex: 0;
     }
 
     .contact-avatar img {
-      width: 150px; 
-      height: 150px;
+      width: 160px; 
+      height: 160px;
       border-radius: 16px; 
       object-fit: cover; 
       border: 2px solid #00f2fe; 
     }
 
-    .contact-content {
-      flex: 1;
-    }
-
-    .contact-links {
-      justify-content: flex-start !important;
-    }
-
     /* Mobile responsive override */
     @media (max-width: 768px) {
       .contact-box {
-        flex-direction: column !important;
+        flex-direction: column-reverse !important;
         text-align: center !important;
-        gap: 20px;
+        gap: 24px;
       }
       .contact-links {
-        justify-content: center !important;
+        align-items: center !important;
       }
   }
   
@@ -793,6 +799,9 @@
           GitHub
         </a>
       </div>
+    </div>
+    <div class="contact-avatar">
+    <img src="DeepanshuGupta.jpg" alt="Deepanshu Gupta" />
     </div>
   </div>
 </section>
