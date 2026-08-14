@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deepanshu Gupta — RPA & Data Analytics Consultant</title>
+<meta name="description" content="Deepanshu Gupta — RPA Consultant and Data Analytics Engineer. Blue Prism, Power Automate, Power BI, SQL, Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0e1117;
+    --bg-alt: #12161e;
+    --surface: #171c26;
+    --surface-2: #1d2330;
+    --line: #2a3140;
+    --text: #e9edf3;
+    --text-dim: #9aa5b6;
+    --text-faint: #616c80;
+    --teal: #52d9c4;
+    --teal-dim: rgba(82,217,196,0.14);
+    --amber: #f0a857;
+    --amber-dim: rgba(240,168,87,0.14);
+    --radius: 10px;
+    --maxw: 1120px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .mono{ font-family: 'JetBrains Mono', monospace; }
+
+  a{ color: inherit; text-decoration: none; }
+  img{ max-width: 100%; display:block; }
+
+  ::selection{ background: var(--teal); color: #06110f; }
+
+  /* ---------- Layout helpers ---------- */
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  section{ position: relative; padding: 120px 0 40px; }
+  @media (max-width: 720px){ section{ padding: 90px 0 20px; } }
+
+  .step-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 18px;
+  }
+  .step-tag::before{
+    content:"";
+    width: 7px; height:7px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 4px var(--teal-dim);
+    flex-shrink:0;
+  }
+
+  .section-head{ max-width: 640px; margin-bottom: 48px; }
+  .section-head h2{ font-size: clamp(26px, 3.4vw, 36px); }
+  .section-head p{ color: var(--text-dim); margin-top: 12px; font-size: 15.5px; }
+
+  /* ---------- Pipeline spine ---------- */
+  .spine{
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--line) 6%, var(--line) 94%, transparent);
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  @media (max-width: 900px){ .spine{ display:none; } }
+
+  /* ---------- Nav ---------- */
+  header{
+    position: fixed; top:0; left:0; right:0;
+    z-index: 100;
+    background: rgba(14,17,23,0.72);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+    transition: border-color .3s ease;
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 68px;
+  }
+  .brand{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    display:flex; align-items:center; gap:9px;
+  }
+  .brand .dot{
+    width:8px;height:8px;border-radius:50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 4px var(--teal-dim);
+  }
+  .navlinks{ display:flex; gap: 30px; align-items:center; }
+  .navlinks a{
+    font-size: 13.5px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.03em;
+    transition: color .2s ease;
+    position: relative;
+  }
+  .navlinks a:hover{ color: var(--text); }
+  .navlinks a::after{
+    content:""; position:absolute; left:0; right:0; bottom:-6px; height:1px;
+    background: var(--teal); transform: scaleX(0); transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .navlinks a:hover::after{ transform: scaleX(1); }
+  .nav-cta{
+    border:1px solid var(--line);
+    padding: 8px 16px;
+    border-radius: 7px;
+    font-size: 13px;
+    color: var(--text) !important;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .nav-cta:hover{ border-color: var(--teal); color: var(--teal) !important; }
+  .navlinks a.nav-cta::after{ display:none; }
+  .menu-btn{ display:none; background:none; border:none; color:var(--text); cursor:pointer; }
+
+  @media (max-width: 800px){
+    .navlinks{
+      position:fixed; top:68px; left:0; right:0;
+      background: var(--bg-alt); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:flex-start; gap:0;
+      max-height:0; overflow:hidden; transition: max-height .3s ease;
+    }
+    .navlinks.open{ max-height: 400px; }
+    .navlinks a{ padding: 16px 28px; width:100%; border-bottom: 1px solid var(--line); }
+    .menu-btn{ display:block; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top: 168px;
+    min-height: 92vh;
+    display:flex; align-items:center;
+  }
+  .hero .wrap{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items:center; }
+  @media (max-width: 900px){ .hero .wrap{ grid-template-columns: 1fr; } .hero{ min-height:auto; padding-bottom:60px; } }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing:0.16em; text-transform:uppercase;
+    color: var(--amber); margin-bottom: 22px; display:flex; align-items:center; gap: 10px;
+  }
+  .eyebrow .line{ width: 34px; height:1px; background: var(--amber); }
+
+  .hero h1{
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.05;
+    color: var(--text);
+  }
+  .hero h1 .accent{ color: var(--teal); }
+  .hero .role{
+    margin-top: 20px;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--text-dim);
+    max-width: 520px;
+  }
+  .hero-meta{
+    margin-top: 30px;
+    display:flex; gap: 22px; flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--text-faint);
+  }
+  .hero-meta span{ color: var(--teal); }
+
+  .hero-ctas{ margin-top: 38px; display:flex; gap: 14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 13px 24px;
+    border-radius: 8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    cursor:pointer;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary{ background: var(--teal); color: #06110f; font-weight:600; }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 30px -8px rgba(82,217,196,0.5); }
+  .btn-ghost{ border-color: var(--line); color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--text-dim); transform: translateY(-2px); }
+
+  /* Hero flow graphic */
+  .flow-graphic{ position:relative; }
+  .flow-graphic svg{ width:100%; height:auto; overflow:visible; }
+  .flow-line{
+    stroke: var(--line);
+    stroke-width: 1.4;
+    fill: none;
+  }
+  .flow-line.active{
+    stroke: var(--teal);
+    stroke-dasharray: 6 7;
+    animation: dash 3.4s linear infinite;
+    opacity: 0.85;
+  }
+  @keyframes dash{ to{ stroke-dashoffset: -260; } }
+  .flow-node{ fill: var(--surface-2); stroke: var(--line); stroke-width: 1.4; }
+  .flow-node.hot{ fill: var(--teal); stroke: var(--teal); }
+  .flow-node.warm{ fill: var(--amber); stroke: var(--amber); }
+  .flow-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    fill: var(--text-faint);
+    letter-spacing: 0.04em;
+  }
+  .pulse{
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity: 0.5; r: 4.5; }
+    50%{ opacity: 1; r: 6.5; }
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{ opacity:0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+
+  /* ---------- About ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+  @media (max-width: 800px){ .about-grid{ grid-template-columns: 1fr; } }
+  .about-grid p{ color: var(--text-dim); font-size: 15.5px; margin: 0 0 16px; }
+  .about-grid p strong{ color: var(--text); font-weight: 500; }
+  .stat-list{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; align-content:start; }
+  .stat{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+  }
+  .stat .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 28px; font-weight:700; color: var(--teal);
+  }
+  .stat .lbl{ font-size: 12.5px; color: var(--text-faint); margin-top: 6px; font-family:'JetBrains Mono', monospace; }
+
+  /* ---------- Experience timeline ---------- */
+  .timeline{ position:relative; padding-left: 34px; }
+  .timeline::before{
+    content:""; position:absolute; left: 5px; top: 6px; bottom: 6px; width:1px;
+    background: var(--line);
+  }
+  .tl-item{ position: relative; padding-bottom: 46px; }
+  .tl-item:last-child{ padding-bottom: 0; }
+  .tl-dot{
+    position:absolute; left: -34px; top: 4px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--teal);
+    box-shadow: 0 0 0 5px var(--teal-dim);
+  }
+  .tl-item.past .tl-dot{ border-color: var(--text-faint); box-shadow: 0 0 0 5px rgba(154,165,182,0.08); }
+
+  .tl-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .tl-card:hover{ border-color: #37404f; transform: translateX(3px); }
+  .tl-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap: 10px; margin-bottom: 6px; }
+  .tl-role{ font-size: 17px; font-weight: 600; }
+  .tl-when{ font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--amber); white-space:nowrap; }
+  .tl-org{ color: var(--text-dim); font-size: 14px; margin-bottom: 16px; }
+  .tl-org .client{ color: var(--text-faint); }
+  .tl-card ul{ margin:0; padding-left: 18px; color: var(--text-dim); font-size: 14.5px; }
+  .tl-card li{ margin-bottom: 9px; }
+  .tl-card li:last-child{ margin-bottom:0; }
+  .tl-card li::marker{ color: var(--teal); }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 900px){ .skills-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 560px){ .skills-grid{ grid-template-columns: 1fr; } }
+  .skill-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 22px 20px;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .skill-card:hover{ transform: translateY(-4px); border-color: var(--teal); }
+  .skill-card h4{ font-size: 14px; letter-spacing:0.06em; text-transform:uppercase; color: var(--teal); margin-bottom: 14px; font-family:'JetBrains Mono', monospace; font-weight:500; }
+  .skill-tags{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .skill-tags span{
+    font-size: 12.5px;
+    padding: 6px 11px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Projects ---------- */
+  .proj-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 900px){ .proj-grid{ grid-template-columns: 1fr; } }
+  .proj-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    display:flex; flex-direction:column;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .proj-card:hover{ transform: translateY(-6px); border-color: #37404f; box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6); }
+  .proj-tag{ font-family:'JetBrains Mono', monospace; font-size:11px; color: var(--amber); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px; }
+  .proj-card h3{ font-size: 18px; margin-bottom: 12px; }
+  .proj-card p{ color: var(--text-dim); font-size: 14px; flex-grow:1; margin: 0 0 16px; }
+  .proj-stack{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 18px; }
+  .proj-stack span{ font-size: 11px; color: var(--text-faint); background: var(--surface-2); padding: 4px 8px; border-radius:5px; font-family:'JetBrains Mono', monospace; }
+  .proj-link{ font-size: 13px; color: var(--teal); font-family:'JetBrains Mono', monospace; display:inline-flex; align-items:center; gap:6px; }
+  .proj-link svg{ width:13px; height:13px; transition: transform .2s ease; }
+  .proj-link:hover svg{ transform: translate(2px,-2px); }
+
+  /* ---------- Certifications ---------- */
+  .cert-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 700px){ .cert-grid{ grid-template-columns: 1fr; } }
+  .cert-item{
+    display:flex; align-items:center; gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .cert-item:hover{ border-color: var(--amber); transform: translateX(3px); }
+  .cert-icon{
+    flex-shrink:0; width: 30px; height:30px; border-radius:7px;
+    background: var(--amber-dim); color: var(--amber);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cert-icon svg{ width:15px; height:15px; }
+
+  /* ---------- Education ---------- */
+  .edu-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap: 20px; flex-wrap:wrap;
+  }
+  .edu-card h3{ font-size: 18px; margin-bottom: 6px; }
+  .edu-card .deg{ color: var(--text-dim); font-size: 14.5px; }
+  .edu-when{ font-family:'JetBrains Mono', monospace; font-size: 12.5px; color: var(--amber); white-space:nowrap; }
+
+  /* ---------- Contact ---------- */
+  .contact-box{
+    background: linear-gradient(145deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 54px 44px;
+    text-align:center;
+  }
+  .contact-box h2{ font-size: clamp(24px,3.6vw,34px); margin-bottom: 14px; }
+  .contact-box p{ color: var(--text-dim); max-width: 480px; margin: 0 auto 30px; font-size:15px; }
+  .contact-links{ display:flex; justify-content:center; gap: 14px; flex-wrap:wrap; }
+  .contact-links a{
+    display:flex; align-items:center; gap: 9px;
+    border: 1px solid var(--line);
+    padding: 12px 20px; border-radius: 8px;
+    font-family:'JetBrains Mono', monospace; font-size: 13px;
+    transition: border-color .2s ease, transform .2s ease, background .2s ease;
+  }
+  .contact-links a:hover{ border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+  .contact-links svg{ width:15px; height:15px; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 46px 0 38px; border-top: 1px solid var(--line); margin-top: 60px; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 14px; }
+  footer p{ margin:0; font-size: 12.5px; color: var(--text-faint); font-family:'JetBrains Mono', monospace; }
+  footer .fbrand{ font-family:'Space Grotesk', sans-serif; font-weight:600; color: var(--text-dim); font-size: 13.5px; }
+
+  /* ---------- Back to top ---------- */
+  #toTop{
+    position: fixed; bottom: 26px; right: 26px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--surface-2); border: 1px solid var(--line);
+    color: var(--teal);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transform: translateY(10px);
+    transition: opacity .25s ease, transform .25s ease, border-color .25s ease;
+    z-index: 90;
+  }
+  #toTop.show{ opacity:1; pointer-events:auto; transform: translateY(0); }
+  #toTop:hover{ border-color: var(--teal); }
+  #toTop svg{ width:16px; height:16px; }
+
+  ::-webkit-scrollbar{ width: 10px; }
+  ::-webkit-scrollbar-track{ background: var(--bg); }
+  ::-webkit-scrollbar-thumb{ background: var(--surface-2); border-radius: 6px; border: 2px solid var(--bg); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand"><span class="dot"></span>DEEPANSHU&nbsp;GUPTA</div>
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="reveal in">
+      <div class="eyebrow"><span class="line"></span>RPA CONSULTANT &amp; DATA ANALYTICS ENGINEER</div>
+      <h1>Automating enterprise <span class="accent">workflows</span> that were built to run.</h1>
+      <p class="role">3.5+ years designing, deploying, and governing Blue Prism &amp; Power Automate solutions across Fortune-500 environments — paired with a growing practice in SQL, Python and Power BI to turn process data into decisions.</p>
+      <div class="hero-meta">
+        <div>📍 Noida, India</div>
+        <div><span>30+</span> production deployments</div>
+        <div><span>16</span> enterprise apps governed</div>
+      </div>
+      <div class="hero-ctas">
+        <a href="#experience" class="btn btn-primary">View Experience</a>
+        <a href="#" class="btn btn-ghost" id="resumeBtn">↓ Download Resume</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="flow-graphic reveal in">
+      <svg viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- connecting lines -->
+        <path class="flow-line active" d="M40 60 H160" />
+        <path class="flow-line active" d="M160 60 V150" />
+        <path class="flow-line active" d="M160 150 H300" />
+        <path class="flow-line" d="M40 60 V180 H120" />
+        <path class="flow-line" d="M120 180 V260" />
+        <path class="flow-line active" d="M120 260 H300 V150" />
+        <path class="flow-line" d="M40 60 V240 H80 V300 H260 V150" />
+
+        <!-- nodes -->
+        <circle class="flow-node hot pulse" cx="40" cy="60" r="6"/>
+        <text class="flow-label" x="14" y="42">TRIGGER</text>
+
+        <rect class="flow-node" x="140" y="40" width="40" height="40" rx="8"/>
+        <text class="flow-label" x="128" y="98">BLUE PRISM</text>
+
+        <rect class="flow-node" x="100" y="160" width="40" height="40" rx="8"/>
+        <text class="flow-label" x="80" y="218">POWER AUTOMATE</text>
+
+        <circle class="flow-node warm" cx="120" cy="280" r="7"/>
+        <text class="flow-label" x="86" y="304">VALIDATION</text>
+
+        <rect class="flow-node hot" x="280" y="130" width="40" height="40" rx="8" opacity="0.9"/>
+        <text class="flow-label" x="262" y="188">SQL / ETL</text>
+
+        <circle class="flow-node pulse" cx="300" cy="60" r="6"/>
+        <text class="flow-label" x="240" y="42">PROD DEPLOY</text>
+
+        <rect class="flow-node warm" x="60" y="290" width="40" height="34" rx="8" opacity="0.85"/>
+        <text class="flow-label" x="46" y="338">POWER BI</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div style="position:relative;">
+<div class="spine"></div>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap reveal">
+    <div class="step-tag">Process 01 — About</div>
+    <div class="about-grid">
+      <div>
+        <p><strong>Results-oriented IT professional</strong> with 3.5+ years in Robotic Process Automation, delivering measurable process optimization through Blue Prism and Power Automate. My work centers on translating ambiguous business needs into scalable, well-tested automation — then keeping it running reliably in production.</p>
+        <p>Alongside RPA, I've built a practical data analytics skillset — SQL, Power BI and Python — to clean, model and visualize the data these processes generate, turning it into dashboards and KPI reporting that support real decisions.</p>
+        <p>I'm currently a <strong>Senior Associate Consultant at Infosys</strong>, supporting global clients including Bayer and International Paper.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><div class="num">30+</div><div class="lbl">BLUE PRISM DEPLOYMENTS</div></div>
+        <div class="stat"><div class="num">16</div><div class="lbl">ENTERPRISE APPS SUPPORTED</div></div>
+        <div class="stat"><div class="num">95%+</div><div class="lbl">SYSTEM AVAILABILITY</div></div>
+        <div class="stat"><div class="num">50%</div><div class="lbl">PROCESSING TIME REDUCED</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="step-tag">Process 02 — Experience</div>
+    <div class="section-head">
+      <h2>Where the automation ran</h2>
+      <p>A track record of designing, deploying and governing RPA systems for enterprise clients.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Senior Associate Consultant</div>
+            <div class="tl-when">MAY 2025 — PRESENT</div>
+          </div>
+          <div class="tl-org">Infosys &nbsp;·&nbsp; <span class="client">Clients: Bayer, International Paper</span></div>
+          <ul>
+            <li>Designed and deployed automation solutions using Power Automate and Blue Prism — translating business needs into scalable workflows, running end-to-end testing, and driving production rollouts.</li>
+            <li>Executed 30+ Blue Prism deployments across Dev, Test and Prod, enabling faster automation releases and reduced manual effort.</li>
+            <li>Maintained and supported 16 enterprise applications (Blue Prism, BME, GRFX, ESKO, LISAM, Celonis and others), achieving 95%+ system availability.</li>
+            <li>Led a cross-functional team of 3 to govern 16 packaged applications, prioritize incidents and coordinate operational improvements.</li>
+            <li>Streamlined vendor coordination for installs, upgrades and issue resolution — cutting turnaround time by ~40%.</li>
+            <li>Led Oracle Java license compliance monitoring across Windows, Unix and workstation servers, mitigating multi-million-dollar audit risk.</li>
+            <li>Served as single point of contact between business users, SMEs and technical teams for issue resolution.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item past">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Custom Software Engineering Analyst</div>
+            <div class="tl-when">DEC 2023 — MAY 2025</div>
+          </div>
+          <div class="tl-org">Accenture &nbsp;·&nbsp; <span class="client">Client: Allegheny Technologies Incorporated (ATI)</span></div>
+          <ul>
+            <li>Created and developed Blue Prism workflows, reducing processing time by 50% and increasing productivity.</li>
+            <li>Ensured business continuity by providing production support and incident resolution across all RPA bots.</li>
+            <li>Served as main point of contact for automation queries, troubleshooting system errors and ServiceNow incident logging.</li>
+            <li>Conducted root cause analysis of recurring production and testing issues to stabilize processes.</li>
+            <li>Recorded process documentation and issue-resolution records to improve operational efficiency.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item past">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Custom Software Engineering Associate</div>
+            <div class="tl-when">AUG 2022 — NOV 2023</div>
+          </div>
+          <div class="tl-org">Accenture &nbsp;·&nbsp; <span class="client">Client: Allegheny Technologies Incorporated (ATI)</span></div>
+          <ul>
+            <li>Decreased business processing time by 50% by designing and developing RPA workflows in Blue Prism.</li>
+            <li>Helped define 20+ high-level use cases across 10+ processes targeted for automation.</li>
+            <li>Collaborated with stakeholders and the development team to strategically scale RPA capabilities org-wide.</li>
+            <li>Generated and maintained RPA deployments across the full lifecycle, from design through deployment.</li>
+            <li>Performed three-phase testing (dev, test, prod), validating, debugging and optimizing automations.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="step-tag">Process 03 — Projects</div>
+    <div class="section-head">
+      <h2>Applied data analytics</h2>
+      <p>Independent projects turning raw datasets into models, dashboards and decisions.</p>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-tag">Python · SQL · Power BI</div>
+        <h3>Customer Churn Analysis</h3>
+        <p>Cleaned and explored a customer churn dataset in Python, queried it in MySQL with joins and aggregations, and built an interactive Power BI dashboard surfacing churn trends by tenure, contract type and payment method — identifying key attrition drivers and high-risk segments.</p>
+        <div class="proj-stack"><span>Pandas</span><span>Matplotlib</span><span>MySQL</span><span>DAX</span></div>
+        <a class="proj-link" href="https://github.com/Deepanshuu07/customer-churn-analysis.git" target="_blank" rel="noopener">
+          View on GitHub
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-tag">SQL · Power BI</div>
+        <h3>Sales Analytics Dashboard</h3>
+        <p>Built an interactive dashboard tracking Total Sales, Profit and Orders. Used SQL to uncover customer, regional and category-level trends, and produced dynamic Power BI visuals highlighting top-performing products and revenue-driving regions.</p>
+        <div class="proj-stack"><span>SQL</span><span>MySQL</span><span>Power Query</span><span>DAX</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-tag">Power BI · DAX</div>
+        <h3>Toy Store KPI Report</h3>
+        <p>Formulated a retail KPI dashboard tracking sales, profit, inventory and product performance. Built DAX measures for category- and store-level analysis, surfacing seasonal demand patterns to support inventory decisions.</p>
+        <div class="proj-stack"><span>Power BI</span><span>DAX</span><span>KPI Reporting</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="step-tag">Process 04 — Skills</div>
+    <div class="section-head">
+      <h2>Technical toolkit</h2>
+      <p>The stack behind every deployed bot and every dashboard.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>RPA Tools</h4>
+        <div class="skill-tags"><span>Blue Prism</span><span>Power Automate</span><span>UiPath</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Data Analytics</h4>
+        <div class="skill-tags"><span>Power BI</span><span>DAX</span><span>Power Query</span><span>Dashboard Development</span><span>KPI Reporting</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Database &amp; Querying</h4>
+        <div class="skill-tags"><span>SQL</span><span>MySQL</span><span>Data Cleaning</span><span>Data Modeling</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Programming</h4>
+        <div class="skill-tags"><span>Python</span><span>Pandas</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Tools &amp; Platforms</h4>
+        <div class="skill-tags"><span>ServiceNow</span><span>Excel VBA</span><span>GitHub</span><span>Microsoft Office</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Technical Practice</h4>
+        <div class="skill-tags"><span>Process Documentation</span><span>Issue Resolution</span><span>Root Cause Analysis</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certifications">
+  <div class="wrap reveal">
+    <div class="step-tag">Process 05 — Certifications</div>
+    <div class="section-head">
+      <h2>Certifications</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l2-1l2 1l-2-5z"/><circle cx="12" cy="8" r="6"/></svg></div>Microsoft Certified: Power BI Data Analyst Associate</div>
+      <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l2-1l2 1l-2-5z"/><circle cx="12" cy="8" r="6"/></svg></div>Microsoft Certified: Power Automate RPA Developer Associate</div>
+      <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l2-1l2 1l-2-5z"/><circle cx="12" cy="8" r="6"/></svg></div>UiPath Certified Professional Automation Developer Associate</div>
+      <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l2-1l2 1l-2-5z"/><circle cx="12" cy="8" r="6"/></svg></div>Google Analytics Skillshop Certification</div>
+      <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l2-1l2 1l-2-5z"/><circle cx="12" cy="8" r="6"/></svg></div>Kaggle Python Certificate</div>
+      <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l2-1l2 1l-2-5z"/><circle cx="12" cy="8" r="6"/></svg></div>Kaggle Pandas Certificate</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="wrap reveal">
+    <div class="step-tag">Process 06 — Education</div>
+    <div class="section-head">
+      <h2>Education</h2>
+    </div>
+    <div class="edu-card">
+      <div>
+        <h3>GLA University</h3>
+        <div class="deg">Bachelor of Technology in Computer Science &nbsp;·&nbsp; Mathura, U.P.</div>
+      </div>
+      <div class="edu-when">AUG 2018 — JUN 2022</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap reveal">
+    <div class="step-tag">Process 07 — Contact</div>
+    <div class="contact-box">
+      <h2>Let's automate something.</h2>
+      <p>Open to conversations about RPA engineering, data analytics roles, or collaboration on process-automation projects.</p>
+      <div class="contact-links">
+        <a href="mailto:deepanshudg99@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+          deepanshudg99@gmail.com
+        </a>
+        <a href="tel:+917078773951">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.79.64 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.43a2 2 0 0 1 2.11-.45c.86.3 1.75.52 2.65.64A2 2 0 0 1 22 16.92z"/></svg>
+          +91-7078773951
+        </a>
+        <a href="https://www.linkedin.com/in/deepanshudg99" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/Deepanshuu07" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /spine wrapper -->
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">Deepanshu Gupta</div>
+    <p>Built from source · Noida, India · © 2026</p>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navlinks = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', () => navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Back to top
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('show', window.scrollY > 500);
+  });
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Resume button placeholder
+  document.getElementById('resumeBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    alert('Add your resume PDF to the repo and link it here (e.g. href="resume.pdf" download).');
+  });
+</script>
+
+</body>
+</html>
