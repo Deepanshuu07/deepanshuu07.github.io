@@ -232,8 +232,11 @@
     stroke-dasharray: 6 7;
     animation: dash 3.4s linear infinite;
     opacity: 0.85;
+    /* Adds desktop optimization layer triggers */
+    will-change: stroke-dashoffset;
+    transform: translateZ(0);
   }
-  @keyframes dash{ to{ stroke-dashoffset: -260; } }
+  @keyframes dash{ from { stroke-dashoffset: 260; } to{ stroke-dashoffset: 0; } }
   .flow-node{ fill: var(--surface-2); stroke: var(--line); stroke-width: 1.4; }
   .flow-node.hot{ fill: var(--teal); stroke: var(--teal); }
   .flow-node.warm{ fill: var(--amber); stroke: var(--amber); }
@@ -503,7 +506,7 @@
   <div class="wrap">
     <div class="reveal in">
       <div class="eyebrow"><span class="line"></span>RPA CONSULTANT &amp; DATA ANALYTICS ENGINEER</div>
-      <h1>From building <span class="accent">scalable bots</span> to crafting actionable<span class="accent"> dashboards.</span></h1>
+      <h1>From building <span class="accent">scalable bots</span> to crafting practical<span class="accent"> dashboards.</span></h1>
       <!--<h1>Automating enterprise <span class="accent">workflows</span> that were built to run.</h1>-->
       <p class="role">4 years at the intersection of automation and analytics — designing, deploying Blue Prism and Power Automate workflows, then querying, modeling and visualizing what they generate.</p>
       <!--<p class="role">3.5+ years designing, deploying, and governing Blue Prism &amp; Power Automate solutions across Fortune-500 environments — paired with a growing practice in SQL, Python and Power BI to turn process data into decisions.</p>-->
